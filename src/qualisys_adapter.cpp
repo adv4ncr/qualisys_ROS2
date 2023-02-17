@@ -7,7 +7,7 @@ LifecycleNodeInterface::CallbackReturn QualisysAdapter::on_configure(const rclcp
 {
 	//RCLCPP_DEBUG_STREAM(this->get_logger(), "main_thread_id: " << std::this_thread::get_id());
 
-	return LifecycleNodeInterface::CallbackReturn::SUCCESS;
+	//return LifecycleNodeInterface::CallbackReturn::SUCCESS;
 
 	// connect to QTM
 	if(!rtProtocol_.Connected() && !rtProtocol_.Connect(qtm_ip_address_.c_str(), qtm_base_port_, &qtm_udp_port_))
@@ -16,27 +16,27 @@ LifecycleNodeInterface::CallbackReturn QualisysAdapter::on_configure(const rclcp
 		return LifecycleNodeInterface::CallbackReturn::FAILURE;
 	}
 
-	// take control over QTM
-	if(!rtProtocol_.TakeControl(qtm_password_.c_str()))
-	{
-		RCLCPP_ERROR(this->get_logger(), "[QTM] no control: %s", rtProtocol_.GetErrorString());
-		return LifecycleNodeInterface::CallbackReturn::FAILURE;
-	}
+	// // take control over QTM
+	// if(!rtProtocol_.TakeControl(qtm_password_.c_str()))
+	// {
+	// 	RCLCPP_ERROR(this->get_logger(), "[QTM] no control: %s", rtProtocol_.GetErrorString());
+	// 	return LifecycleNodeInterface::CallbackReturn::FAILURE;
+	// }
 
-	if(read_measurement_file_)
-	{
-		// start file
-		if(!rtProtocol_.StartRTOnFile())
-		{
-			RCLCPP_ERROR(this->get_logger(), "[QTM] file not started: %s", rtProtocol_.GetErrorString());
-			return LifecycleNodeInterface::CallbackReturn::FAILURE;
-		}
-	}
-	else if(!rtProtocol_.StartCapture())
-	{
-		RCLCPP_ERROR(this->get_logger(), "[QTM] cannot start capture: %s", rtProtocol_.GetErrorString());
-		return LifecycleNodeInterface::CallbackReturn::FAILURE;	
-	}
+	// if(read_measurement_file_)
+	// {
+	// 	// start file
+	// 	if(!rtProtocol_.StartRTOnFile())
+	// 	{
+	// 		RCLCPP_ERROR(this->get_logger(), "[QTM] file not started: %s", rtProtocol_.GetErrorString());
+	// 		return LifecycleNodeInterface::CallbackReturn::FAILURE;
+	// 	}
+	// }
+	// else if(!rtProtocol_.StartCapture())
+	// {
+	// 	RCLCPP_ERROR(this->get_logger(), "[QTM] cannot start capture: %s", rtProtocol_.GetErrorString());
+	// 	return LifecycleNodeInterface::CallbackReturn::FAILURE;	
+	// }
 
 	// get 6DOF rigid body settings from QTM
 	if(!qtm_data_available_ && !rtProtocol_.Read6DOFSettings(qtm_data_available_))

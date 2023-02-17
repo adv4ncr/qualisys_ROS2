@@ -3,9 +3,6 @@
  * 
 */
 
-// https://docs.ros.org/en/humble/Tutorials/Intermediate/Tf2/Writing-A-Tf2-Broadcaster-Cpp.html
-// https://github.com/ros2/demos/blob/humble/lifecycle/README.rst
-
 // QTM video: https://www.qualisys.com/video-tutorials/how-to-use-the-c-sdk-for-qtm-2/
 // QTM git: https://github.com/qualisys/qualisys_cpp_sdk
 // QTM git rigidBodyStreaming: https://github.com/qualisys/qualisys_cpp_sdk/blob/master/RigidBodyStreaming/RigidBodyStreaming.cpp
