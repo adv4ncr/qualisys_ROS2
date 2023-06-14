@@ -1,0 +1,23 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 46e05c5..dae461a 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -2,8 +2,9 @@ cmake_minimum_required(VERSION 3.8)
+ project(qualisys_cpp_sdk)
+ 
+ option(BUILD_EXAMPLES "Build examples" OFF)
++include(GNUInstallDirs)
+ 
+-add_library(${PROJECT_NAME}
++add_library(${PROJECT_NAME} SHARED
+         Markup.cpp
+         Network.cpp
+         RTPacket.cpp
+@@ -29,7 +30,6 @@ set_target_properties(${PROJECT_NAME}
+ 
+ # ----------- INSTALL & EXPORT -----------
+ 
+-include(GNUInstallDirs)
+ 
+ set(ConfigPackageLocation ${CMAKE_INSTALL_LIBDIR}/${PROJECT_NAME})
+ 
